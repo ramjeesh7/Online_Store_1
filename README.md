@@ -1,1 +1,2 @@
-https://stom20211.github.io/online-store/
+Click the following link to access this website:
+https://ramjeesh7.github.io/Online_Store_1/
