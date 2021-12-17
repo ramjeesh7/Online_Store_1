@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple</title>
+</head>
+<body onload="getLocation()">
+    <p id ="greeting"> <p>
+   <h4>Today's Apple Prices and Locations
+   </h4>   
+<table border="1" style="background-color: pink;">
+    <tr>
+        <td> Store</td>
+        <td> Price per pound</td>
+        <td> Distance From Your Location</td>
+        <td> Purchase</td>
+    </tr>
+    <tr>
+    <td>Apple Store 1</td>
+    <td> $2.40</td>
+    <td><p id="store1_distance"></button></p> </td>
+    <td> Order Online</td>
+</tr>
+<tr>
+    <td>Apple Store 2</td>
+    <td>$1.50</td>
+    <td><p id="store2_distance"></button></p> </td>
+    <td> Order Online</td>
+</tr>
+</table>  
+
+<script src="myscripts.js"></script>
+
+<script>
+    var store1_distance= document.getElementById("store1_distance");
+    var store2_distance= document.getElementById("store2_distance");
+    
+    
+    
+     
+    // Distance Between two points on Earth
+     
+        function distance(lat1,
+                         lat2, lon1, lon2)
+        {
+       
+            // named toRadians which converts from
+            // degrees to radians.
+            lon1 =  lon1 * Math.PI / 180;
+            lon2 = lon2 * Math.PI / 180;
+            lat1 = lat1 * Math.PI / 180;
+            lat2 = lat2 * Math.PI / 180;
+       
+            // Haversine formula
+            let dlon = lon2 - lon1;
+            let dlat = lat2 - lat1;
+            let a = Math.pow(Math.sin(dlat / 2), 2)
+                     + Math.cos(lat1) * Math.cos(lat2)
+                     * Math.pow(Math.sin(dlon / 2),2);
+                   
+            let c = 2 * Math.asin(Math.sqrt(a));
+       
+            // Radius of earth =6378 kilometers=3956 miles
+            //let r = 6371;
+            let r=3956;
+       
+            // calculate the result
+            return (c * r);
+        }
+     
+    // Driver code  
+    
+    
+            //store1
+            //User1 Store
+            let store1_lat = 27.706053512340716;
+            let store1_lon = 85.30945344000493;
+
+            //store2
+            let store2_lat = 33.76008402112574;
+            let store2_lon= -84.39602420628964;
+
+            function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+            }
+            
+            function showPosition(position) { 
+                //user's location
+                let user_lat=position.coords.latitude;
+                let user_lon=position.coords.longitude; 
+                store2_distance.innerHTML =Math.ceil(distance(store1_lat, user_lat, store1_lon, user_lon)) + " Miles";
+                store1_distance.innerHTML =Math.ceil(distance(store2_lat, user_lat, store2_lon, user_lon)) + " Miles";
+                
+            }
+    </script>
+</body>
+</html>
